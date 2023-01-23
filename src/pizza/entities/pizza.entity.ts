@@ -64,7 +64,7 @@ export class Pizza {
     example: {
       classifications: {
         new: true,
-        hot: false,
+        spicy: false,
         vegetarian: true,
       },
     },
@@ -72,7 +72,7 @@ export class Pizza {
   })
   classifications: {
     new?: boolean;
-    hot?: boolean;
+    spicy?: boolean;
     vegetarian?: boolean;
   };
 }

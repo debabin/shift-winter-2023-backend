@@ -8,7 +8,7 @@ async function bootstrap() {
   app.enableCors();
 
   const config = new DocumentBuilder()
-    .setTitle('Shift winter 2022 backend ❄️')
+    .setTitle('Shift winter 2023 backend ❄️')
     .setDescription(
       'Данный репозиторий содержит backend для выполнения индивидуальных заданий.',
     )

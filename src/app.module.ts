@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ScheduleModule, Cron } from '@nestjs/schedule';
-import { Injectable, Logger } from '@nestjs/common';
+import { ScheduleModule } from '@nestjs/schedule';
 
 import { PizzaModule } from './pizza/pizza.module';
 import { RspModule } from './rsp/rsp.module';

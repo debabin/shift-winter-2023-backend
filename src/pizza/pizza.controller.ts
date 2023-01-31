@@ -89,18 +89,26 @@ export class PizzaController {
       };
     }
 
-    const sum = this.pizzaService.calculateOrderSum(createOrder.pizzas);
+    try {
+      const sum = this.pizzaService.calculateOrderSum(createOrder.pizzas);
+      const pizzas = this.pizzaService.getByIds(
+        createOrder.pizzas.map((pizza) => pizza.id),
+      );
 
-    if (Object.keys(errors).length) {
-      throw new BadRequestException(errors);
+      if (Object.keys(errors).length) {
+        throw new BadRequestException(errors);
+      }
+
+      return {
+        order: {
+          id: Math.floor(Math.random() * 1000000000),
+          sum,
+          pizzas,
+          order: createOrder,
+        },
+      };
+    } catch (error) {
+      throw new BadRequestException(error.message);
     }
-
-    return {
-      order: {
-        id: Math.floor(Math.random() * 1000000000),
-        sum,
-        order: createOrder,
-      },
-    };
   }
 }

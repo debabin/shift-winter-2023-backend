@@ -412,6 +412,15 @@ export class PizzaService {
     return sum;
   }
 
+  getByIds(ids: Pizza['id'][]) {
+    return ids.map((id) => {
+      const pizza = PIZZAS.find((pizza) => pizza.id === id);
+      if (!pizza) throw new Error('Wrong pizza id');
+
+      return pizza;
+    });
+  }
+
   getById({ id }: { id: Pizza['id'] }) {
     return PIZZAS.find((pizza) => pizza.id === id);
   }

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Details } from '../entities/details.entity';
-import { OrderedPizza } from '../entities/pizza.entity';
+import { OrderedPizza, Pizza } from '../entities/pizza.entity';
 
 export class CreateOrder {
   @ApiProperty({
@@ -16,5 +16,5 @@ export class CreateOrderResponse {
   id: number;
   sum: number;
   order: CreateOrder;
+  pizzas: Pizza[];
 }
-export { OrderedPizza };

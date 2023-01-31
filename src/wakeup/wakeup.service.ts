@@ -9,7 +9,7 @@ export class WakeUpService {
 
   private readonly logger = new Logger(WakeUpService.name);
 
-  @Cron('* */20 * * * *')
+  @Cron('0 */20 * * * *')
   async handleCron() {
     const request = this.httpService
       .get('https://shift-winter-2023-backend.onrender.com/api', {

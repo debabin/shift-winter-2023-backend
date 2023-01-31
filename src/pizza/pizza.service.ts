@@ -374,6 +374,7 @@ const PIZZAS: Pizza[] = [
 ];
 
 import { Injectable } from '@nestjs/common';
+import { OrderedPizza } from './entities/pizza.entity';
 
 @Injectable()
 export class PizzaService {
@@ -393,6 +394,22 @@ export class PizzaService {
 
       return isHot && isVegetarian && isNew;
     });
+  }
+
+  calculateOrderSum(orderePizzaz: OrderedPizza[]) {
+    let sum = 0;
+
+    orderePizzaz.forEach((orderePizza) => {
+      const pizza = PIZZAS.find((pizza) => pizza.id === orderePizza.id);
+      if (!pizza) throw new Error('Wrong pizza id');
+
+      sum += pizza.price.default + pizza.price.size[orderePizza.size];
+      if (orderePizza.crust) {
+        sum += pizza.price.crust[orderePizza.crust];
+      }
+    });
+
+    return sum;
   }
 
   getById({ id }: { id: Pizza['id'] }) {

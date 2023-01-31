@@ -8,7 +8,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateOrder } from './dto/createOrder.dto';
+import { CreateOrder, CreateOrderResponse } from './dto/createOrder.dto';
 import { GetAllPizza } from './dto/getAllPizza.dto';
 import { Pizza } from './entities/pizza.entity';
 import { PizzaService } from './pizza.service';
@@ -65,8 +65,8 @@ export class PizzaController {
   @ApiOperation({ summary: 'Создать заявку на доставку' })
   @ApiResponse({
     status: 200,
-    description: 'Pizzas',
-    type: [Pizza],
+    description: 'Created order',
+    type: CreateOrderResponse,
   })
   createPizzaOrder(@Body() createOrder: CreateOrder) {
     let errors = {};
@@ -89,12 +89,18 @@ export class PizzaController {
       };
     }
 
+    const sum = this.pizzaService.calculateOrderSum(createOrder.pizzas);
+
     if (Object.keys(errors).length) {
       throw new BadRequestException(errors);
     }
 
     return {
-      order: { id: Math.floor(Math.random() * 1000000000), ...createOrder },
+      order: {
+        id: Math.floor(Math.random() * 1000000000),
+        sum,
+        order: createOrder,
+      },
     };
   }
 }

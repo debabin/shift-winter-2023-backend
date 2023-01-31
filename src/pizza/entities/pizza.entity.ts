@@ -76,3 +76,12 @@ export class Pizza {
     vegetarian?: boolean;
   };
 }
+
+export class OrderedPizza {
+  @ApiProperty({ example: 1, description: 'Номер пиццы' })
+  id: Pizza['id'];
+  @ApiProperty({ example: 'medium', description: 'Размер пиццы' })
+  size: 'small' | 'medium' | 'large';
+  @ApiProperty({ example: 'cheesy', description: 'Корка для пиццы' })
+  crust?: 'cheesy' | 'cheesySausage';
+}
